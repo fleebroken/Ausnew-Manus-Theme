@@ -1,6 +1,6 @@
 /* ============================================================
    AUSnew Support Services — Wufoo Custom Theme CSS
-   Version: 4.0 (Next Button Image Replacement — Navy Override)
+   Version: 4.2 (Visual Match to Target Preview)
 
    Brand Palette:
      Primary Navy  : #1B3A5C
@@ -198,10 +198,10 @@ div.wufoo {
 .wufoo span.label {
   font-family: 'Inter', sans-serif !important;
   color: #1B3A5C !important;
-  font-size: 0.875rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.2px !important;
-  margin-bottom: 5px !important;
+  font-size: 0.82rem !important;      /* Slightly smaller, matching preview */
+  font-weight: 700 !important;        /* Bolder to match preview */
+  letter-spacing: 0.1px !important;
+  margin-bottom: 6px !important;
   display: block !important;
   height: auto !important;
   overflow: visible !important;
@@ -228,10 +228,10 @@ div.wufoo {
 .wufoo select {
   font-family: 'Inter', sans-serif !important;
   color: #1B3A5C !important;
-  background-color: #FFFFFF !important;
-  border: 1.5px solid #D1D9E0 !important;
-  border-radius: 8px !important;
-  padding: 10px 14px !important;
+  background-color: #F9FBFC !important;   /* Subtle grey bg matching preview */
+  border: 1px solid #D1D9E0 !important;   /* Slightly thinner, cleaner border */
+  border-radius: 6px !important;
+  padding: 11px 14px !important;
   font-size: 16px !important;
   width: 100% !important;
   box-sizing: border-box !important;
@@ -256,7 +256,8 @@ div.wufoo {
 .wufoo textarea:focus,
 .wufoo select:focus {
   border-color: #2BBFCF !important;
-  box-shadow: 0 0 0 3px rgba(43, 191, 207, 0.18) !important;
+  background-color: #FFFFFF !important;   /* White on focus, grey at rest */
+  box-shadow: 0 0 0 3px rgba(43, 191, 207, 0.22) !important;
 }
 
 .wufoo input::placeholder,
@@ -273,7 +274,7 @@ div.wufoo {
 }
 
 /* ============================================================
-   RADIO BUTTONS & CHECKBOXES
+   RADIO BUTTONS & CHECKBOXES — Custom solid teal to match preview
    ============================================================ */
 .wufoo .choices li label,
 .wufoo .choice label {
@@ -281,15 +282,75 @@ div.wufoo {
   color: #3D5166 !important;
   font-size: 0.875rem !important;
   font-weight: 400 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
 }
 
+/* Hide native input — replaced with custom styled pseudo-element */
 .wufoo input[type="radio"],
 .wufoo input[type="checkbox"] {
-  accent-color: #2BBFCF !important;
-  width: 16px !important;
-  height: 16px !important;
-  margin-right: 8px !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 18px !important;
+  height: 18px !important;
+  border: 2px solid #D1D9E0 !important;
+  border-radius: 50% !important;           /* Circle for radio */
+  background-color: #FFFFFF !important;
   cursor: pointer !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  transition: border-color 0.15s ease, background-color 0.15s ease !important;
+  position: relative !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+.wufoo input[type="checkbox"] {
+  border-radius: 4px !important;           /* Square for checkbox */
+}
+
+/* Checked state — solid teal fill */
+.wufoo input[type="radio"]:checked,
+.wufoo input[type="checkbox"]:checked {
+  background-color: #2BBFCF !important;
+  border-color: #2BBFCF !important;
+}
+
+/* White dot/tick inside checked radio */
+.wufoo input[type="radio"]:checked::after {
+  content: '' !important;
+  display: block !important;
+  width: 7px !important;
+  height: 7px !important;
+  background: #FFFFFF !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* White tick inside checked checkbox */
+.wufoo input[type="checkbox"]:checked::after {
+  content: '' !important;
+  display: block !important;
+  width: 5px !important;
+  height: 9px !important;
+  border: 2px solid #FFFFFF !important;
+  border-top: none !important;
+  border-left: none !important;
+  position: absolute !important;
+  top: 40% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(45deg) !important;
+}
+
+/* Hover state */
+.wufoo input[type="radio"]:hover,
+.wufoo input[type="checkbox"]:hover {
+  border-color: #2BBFCF !important;
 }
 
 /* ============================================================
@@ -534,19 +595,33 @@ button#previousPageButton:active {
 }
 
 /* ============================================================
-   SECTION HEADERS
+   SECTION HEADERS — match preview: bold navy, subtle grey divider
    ============================================================ */
 .wufoo .sectionHeader,
 .wufoo h3.sectionHeader {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   color: #1B3A5C !important;
-  font-size: 1.1rem !important;
-  font-weight: 600 !important;
-  border-left: 4px solid #2BBFCF !important;
-  padding-left: 12px !important;
-  margin: 28px 0 16px !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1px !important;
+  border-left: none !important;
+  border-bottom: 1px solid #E8EEF3 !important;
+  padding-left: 0 !important;
+  padding-bottom: 6px !important;
+  margin: 24px 0 12px !important;
   height: auto !important;
   overflow: visible !important;
+  text-transform: none !important;
+}
+
+/* Section description text below section title */
+.wufoo .sectionHeader + p,
+.wufoo .sectionHeader p,
+.wufoo li.section p {
+  font-family: 'Inter', sans-serif !important;
+  color: #3D5166 !important;
+  font-size: 0.82rem !important;
+  margin: 0 0 10px !important;
 }
 
 /* ============================================================
