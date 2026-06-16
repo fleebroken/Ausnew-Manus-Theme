@@ -1,0 +1,698 @@
+/* ============================================================
+   AUSnew Support Services — Wufoo Custom Theme CSS
+   Version: 4.0 (Next Button Image Replacement — Navy Override)
+
+   Brand Palette:
+     Primary Navy  : #1B3A5C
+     Teal Accent   : #2BBFCF
+     Light Teal    : #5DD3C8
+     White         : #FFFFFF
+     Light Grey BG : #F5F8FA
+     Border Grey   : #D1D9E0
+     Text Dark     : #1B3A5C
+     Text Body     : #3D5166
+
+   Fonts: Poppins (headings) · Inter (body)
+
+   MOBILE SCROLL FIX v2.0:
+   - Removed all fixed heights from containers
+   - Removed overflow:hidden from all elements
+   - All containers use height:auto / min-height
+   - Body/html set to overflow-y:auto, not hidden
+   - Iframe-friendly: no clipping, no position:fixed traps
+
+   BUTTON RESTYLE v4.1:
+   - Next button: type=image PNG replaced with navy #1B3A5C overlay
+   - Go Back button: Orange #E8630A outline, RIGHT of Next
+   - Progress bar: fixed z-index and positioning to prevent overlap
+   ============================================================ */
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+/* ============================================================
+   CRITICAL MOBILE SCROLL FIXES
+   ============================================================ */
+html,
+body {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  height: auto !important;
+  min-height: 100% !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+}
+
+#wufoo-form-container,
+.wufoo-form-container,
+.wufoo-outer-container,
+.wufoo-inner-container,
+div[id^="wufoo"],
+div[class^="wufoo"] {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  position: static !important;
+}
+
+.wufoo,
+.wufoo form,
+form.wufoo,
+div.wufoo {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.wufoo ul.fields,
+.wufoo ol.fields,
+.wufoo ul,
+.wufoo ol {
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+.wufoo ul.fields > li,
+.wufoo li.field,
+.wufoo .field {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+/* ============================================================
+   FORM WRAPPER & PAGE BACKGROUND
+   ============================================================ */
+body,
+html {
+  background-color: #F5F8FA !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+#wufoo-form-container,
+.wufoo,
+.wufoo form,
+div.wufoo {
+  font-family: 'Inter', sans-serif !important;
+  background-color: #FFFFFF !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 24px rgba(27, 58, 92, 0.10) !important;
+  padding: 32px !important;
+  width: 100% !important;
+  max-width: 680px !important;
+  box-sizing: border-box !important;
+  margin: 0 auto !important;
+}
+
+/* ============================================================
+   FORM HEADER / TITLE
+   ============================================================ */
+.wufoo h2,
+.wufoo .formHeader h2,
+.wufoo .formHeader,
+#formHeader h2,
+#formHeader {
+  font-family: 'Poppins', sans-serif !important;
+  color: #1B3A5C !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.3px !important;
+  margin-bottom: 8px !important;
+  border-bottom: 3px solid #2BBFCF !important;
+  padding-bottom: 12px !important;
+  overflow: visible !important;
+  height: auto !important;
+}
+
+.wufoo .formHeader p,
+#formHeader p {
+  font-family: 'Inter', sans-serif !important;
+  color: #3D5166 !important;
+  font-size: 0.95rem !important;
+  margin-top: 6px !important;
+}
+
+/* ============================================================
+   PROGRESS BAR (multi-page forms)
+   FIX: Isolate from button row — clear positioning context
+   so page numbers (2/6 etc.) cannot bleed into the bar.
+   ============================================================ */
+.wufoo .progressBar,
+.wufoo #progressBar,
+#progressBar {
+  background-color: #D1D9E0 !important;
+  border-radius: 99px !important;
+  height: 8px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  z-index: 0 !important;
+  margin-bottom: 20px !important;
+  /* Ensure no text/children render on top */
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.wufoo .progressBar span,
+.wufoo #progressBar span,
+#progressBar span {
+  background-color: #2BBFCF !important;
+  border-radius: 99px !important;
+  display: block !important;
+  height: 100% !important;
+  transition: width 0.4s ease !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* FIX: Page counter text that Wufoo injects (e.g. "2/6")
+   sits OUTSIDE the bar, below it, not overlapping */
+.wufoo .progressBar + *,
+#progressBar + *,
+.wufoo .paging,
+.wufoo .pageCount,
+.wufoo span.pageCount,
+.wufoo .page_count {
+  display: block !important;
+  text-align: right !important;
+  font-size: 0.75rem !important;
+  color: #3D5166 !important;
+  margin-top: 4px !important;
+  margin-bottom: 12px !important;
+  position: static !important;
+  z-index: auto !important;
+  /* Ensure it's BELOW the bar, never inside it */
+  clear: both !important;
+}
+
+/* ============================================================
+   FIELD LABELS
+   ============================================================ */
+.wufoo label,
+.wufoo .label,
+.wufoo li.notranslate > label,
+.wufoo .field label,
+.wufoo span.label {
+  font-family: 'Inter', sans-serif !important;
+  color: #1B3A5C !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2px !important;
+  margin-bottom: 5px !important;
+  display: block !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.wufoo label em,
+.wufoo .req {
+  color: #2BBFCF !important;
+  font-style: normal !important;
+}
+
+/* ============================================================
+   INPUT FIELDS, TEXTAREAS & SELECT DROPDOWNS
+   ============================================================ */
+.wufoo input[type="text"],
+.wufoo input[type="email"],
+.wufoo input[type="tel"],
+.wufoo input[type="number"],
+.wufoo input[type="url"],
+.wufoo input[type="date"],
+.wufoo input[type="time"],
+.wufoo input[type="password"],
+.wufoo textarea,
+.wufoo select {
+  font-family: 'Inter', sans-serif !important;
+  color: #1B3A5C !important;
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #D1D9E0 !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  font-size: 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  -webkit-box-shadow: none !important;
+}
+
+.wufoo input[type="text"]:focus,
+.wufoo input[type="email"]:focus,
+.wufoo input[type="tel"]:focus,
+.wufoo input[type="number"]:focus,
+.wufoo input[type="url"]:focus,
+.wufoo input[type="date"]:focus,
+.wufoo input[type="time"]:focus,
+.wufoo input[type="password"]:focus,
+.wufoo textarea:focus,
+.wufoo select:focus {
+  border-color: #2BBFCF !important;
+  box-shadow: 0 0 0 3px rgba(43, 191, 207, 0.18) !important;
+}
+
+.wufoo input::placeholder,
+.wufoo textarea::placeholder {
+  color: #A0B0BF !important;
+  font-style: normal !important;
+}
+
+.wufoo textarea {
+  min-height: 110px !important;
+  height: auto !important;
+  resize: vertical !important;
+  overflow-y: auto !important;
+}
+
+/* ============================================================
+   RADIO BUTTONS & CHECKBOXES
+   ============================================================ */
+.wufoo .choices li label,
+.wufoo .choice label {
+  font-family: 'Inter', sans-serif !important;
+  color: #3D5166 !important;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+}
+
+.wufoo input[type="radio"],
+.wufoo input[type="checkbox"] {
+  accent-color: #2BBFCF !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin-right: 8px !important;
+  cursor: pointer !important;
+}
+
+/* ============================================================
+   FIELD SECTIONS / LIST ITEMS
+   ============================================================ */
+.wufoo ul.fields > li,
+.wufoo li.field {
+  margin-bottom: 20px !important;
+  list-style: none !important;
+  padding: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* ============================================================
+   BUTTON ROW LAYOUT
+   FIX: Next LEFT (primary), Go Back RIGHT (secondary)
+   Using justify-content: flex-start with Go Back pushed via margin-left:auto
+   ============================================================ */
+li.buttons,
+.wufoo li.buttons,
+ul.fields li.buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;   /* Next anchors LEFT */
+  gap: 0 !important;                         /* We use margin instead */
+  flex-wrap: nowrap !important;
+  list-style: none !important;
+  padding: 16px 0 0 0 !important;
+  margin-top: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+li.buttons > div,
+.wufoo li.buttons > div {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0 !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+}
+
+/* ============================================================
+   NEXT BUTTON (type="image") — Navy blue overlay
+   ============================================================ */
+input.btImg,
+input.btImg.submit,
+.wufoo input.btImg,
+.wufoo input.btImg.submit,
+input#nextPageButton,
+.wufoo input#nextPageButton,
+li.buttons input[type="image"],
+.wufoo li.buttons input[type="image"],
+li.buttons input.btImg {
+  color: transparent !important;
+  font-size: 0 !important;
+  background-color: #1B3A5C !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 0 !important;
+  width: 180px !important;
+  height: 52px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  box-shadow: 0 6px 20px rgba(27, 58, 92, 0.35) !important;
+  transition: all 0.2s ease !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  touch-action: manipulation !important;
+  order: 1 !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+  position: relative !important;
+  text-indent: -9999px !important;
+  margin-right: auto !important;   /* Pushes Go Back to the far right */
+}
+
+input.btImg:hover,
+input.btImg.submit:hover,
+.wufoo input.btImg:hover,
+input#nextPageButton:hover,
+.wufoo input#nextPageButton:hover,
+li.buttons input[type="image"]:hover {
+  background-color: #2BBFCF !important;
+  box-shadow: 0 8px 24px rgba(43, 191, 207, 0.45) !important;
+  transform: translateY(-2px) !important;
+}
+
+input.btImg:active,
+input#nextPageButton:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 3px 10px rgba(27, 58, 92, 0.3) !important;
+}
+
+/* ============================================================
+   FINAL SUBMIT BUTTON (type="submit")
+   ============================================================ */
+input[type="submit"],
+button[type="submit"],
+.wufoo input[type="submit"],
+.wufoo button[type="submit"],
+.wufoo .submitButton,
+#saveForm,
+.wufoo #saveForm,
+li.buttons input[type="submit"] {
+  font-family: 'Poppins', sans-serif !important;
+  background-color: #1B3A5C !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 15px 48px !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 6px 20px rgba(27, 58, 92, 0.35) !important;
+  display: inline-block !important;
+  min-width: 180px !important;
+  text-align: center !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  touch-action: manipulation !important;
+  order: 1 !important;
+  flex-shrink: 0 !important;
+  margin-right: auto !important;   /* Pushes Go Back to the far right */
+}
+
+input[type="submit"]:hover,
+.wufoo input[type="submit"]:hover,
+#saveForm:hover {
+  background-color: #2BBFCF !important;
+  box-shadow: 0 8px 24px rgba(43, 191, 207, 0.45) !important;
+  transform: translateY(-2px) !important;
+}
+
+input[type="submit"]:active,
+.wufoo input[type="submit"]:active {
+  transform: translateY(0) !important;
+}
+
+/* ============================================================
+   GO BACK BUTTON — Orange outline, RIGHT side
+   FIX: order:2 + margin-left:auto pushes it to the far right
+   ============================================================ */
+#previousPageButton,
+button#previousPageButton,
+.wufoo button#previousPageButton,
+.wufoo #previousPageButton,
+li.buttons button,
+.wufoo li.buttons button {
+  font-family: 'Inter', sans-serif !important;
+  background-color: transparent !important;
+  color: #E8630A !important;
+  border: 1.5px solid #E8630A !important;
+  border-radius: 6px !important;
+  padding: 8px 20px !important;
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 90px !important;
+  max-width: 130px !important;
+  height: 40px !important;
+  text-align: center !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  touch-action: manipulation !important;
+  order: 2 !important;
+  flex-shrink: 0 !important;
+  opacity: 0.80 !important;
+  vertical-align: middle !important;
+  margin-left: auto !important;   /* KEY FIX: pushes button to far RIGHT */
+  white-space: nowrap !important;
+}
+
+#previousPageButton:hover,
+button#previousPageButton:hover,
+.wufoo button#previousPageButton:hover,
+li.buttons button:hover {
+  background-color: rgba(232, 99, 10, 0.06) !important;
+  opacity: 1 !important;
+  transform: translateY(-1px) !important;
+}
+
+#previousPageButton:active,
+button#previousPageButton:active {
+  transform: translateY(0) !important;
+}
+
+/* ============================================================
+   FORM FOOTER / POWERED BY WUFOO
+   ============================================================ */
+.wufoo .formFooter,
+#formFooter {
+  border-top: 1px solid #D1D9E0 !important;
+  margin-top: 24px !important;
+  padding-top: 12px !important;
+  font-size: 0.75rem !important;
+  color: #A0B0BF !important;
+  font-family: 'Inter', sans-serif !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* ============================================================
+   ERROR & VALIDATION MESSAGES
+   ============================================================ */
+.wufoo .errBoxHead,
+.wufoo .errBox {
+  background-color: #FFF3F3 !important;
+  border: 1.5px solid #FF6B6B !important;
+  border-radius: 8px !important;
+  color: #C0392B !important;
+  font-family: 'Inter', sans-serif !important;
+  padding: 10px 14px !important;
+  font-size: 0.85rem !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.wufoo .errMsg,
+.wufoo span.errMsg {
+  color: #C0392B !important;
+  font-size: 0.8rem !important;
+  font-family: 'Inter', sans-serif !important;
+  margin-top: 4px !important;
+  display: block !important;
+}
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.wufoo .sectionHeader,
+.wufoo h3.sectionHeader {
+  font-family: 'Poppins', sans-serif !important;
+  color: #1B3A5C !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  border-left: 4px solid #2BBFCF !important;
+  padding-left: 12px !important;
+  margin: 28px 0 16px !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* ============================================================
+   DESCRIPTION / INSTRUCTIONS TEXT
+   ============================================================ */
+.wufoo .instruct,
+.wufoo .instructions,
+.wufoo p.instruct {
+  font-family: 'Inter', sans-serif !important;
+  color: #3D5166 !important;
+  font-size: 0.82rem !important;
+  margin-top: 4px !important;
+  font-style: italic !important;
+}
+
+/* ============================================================
+   CONFIRMATION / SUCCESS PAGE
+   ============================================================ */
+.wufoo .confirm,
+#confirm {
+  font-family: 'Poppins', sans-serif !important;
+  color: #1B3A5C !important;
+  text-align: center !important;
+  padding: 32px !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.wufoo .confirm h2,
+#confirm h2 {
+  color: #2BBFCF !important;
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE (max-width: 600px)
+   ============================================================ */
+@media (max-width: 600px) {
+
+  html, body {
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100% !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  #wufoo-form-container,
+  .wufoo,
+  .wufoo form,
+  div.wufoo {
+    padding: 20px 16px !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .wufoo h2,
+  .wufoo .formHeader h2 {
+    font-size: 1.35rem !important;
+    height: auto !important;
+  }
+
+  /* Stack buttons vertically on mobile — Next full width on top */
+  li.buttons,
+  .wufoo li.buttons,
+  ul.fields li.buttons {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  li.buttons > div,
+  .wufoo li.buttons > div {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  /* Next button full width on mobile */
+  input.btImg,
+  input.btImg.submit,
+  input#nextPageButton,
+  li.buttons input[type="image"],
+  .wufoo input[type="submit"],
+  .wufoo .submitButton,
+  #saveForm {
+    width: 100% !important;
+    padding: 14px !important;
+    font-size: 1rem !important;
+    order: 1 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Go Back button — below Next on mobile, left-aligned */
+  #previousPageButton,
+  button#previousPageButton,
+  .wufoo button#previousPageButton,
+  li.buttons button {
+    width: auto !important;
+    min-width: 100px !important;
+    max-width: 140px !important;
+    padding: 9px 18px !important;
+    font-size: 0.82rem !important;
+    order: 2 !important;
+    align-self: flex-start !important;
+    margin-left: 0 !important;   /* Reset on mobile — left-align below Next */
+    height: auto !important;
+  }
+
+  /* Ensure all field containers expand naturally */
+  .wufoo ul.fields,
+  .wufoo ul.fields > li,
+  .wufoo li.field,
+  .wufoo .field,
+  .wufoo .choices {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .wufoo input[type="text"],
+  .wufoo input[type="email"],
+  .wufoo input[type="tel"],
+  .wufoo input[type="number"],
+  .wufoo input[type="url"],
+  .wufoo input[type="date"],
+  .wufoo input[type="time"],
+  .wufoo input[type="password"],
+  .wufoo textarea,
+  .wufoo select {
+    font-size: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+  }
+
+  .wufoo textarea {
+    min-height: 90px !important;
+    height: auto !important;
+  }
+}
